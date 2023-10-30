@@ -1,20 +1,21 @@
 package Cawassement;
 import java.time.Duration;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-
+import org.testng.annotations.Test;
 import io.github.bonigarcia.wdm.WebDriverManager;
+
 
 
 public class Assement {
 
-	public static void main(String[] args) {
+	//public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-	
+	@Test
+	public void assement() {
 			        // Set the path to your ChromeDriver executable
 			       WebDriverManager.chromedriver().setup();
 			        
@@ -25,7 +26,8 @@ public class Assement {
 			        // Navigate to the URL
 			        driver.get("https://testpages.herokuapp.com/styled/tag/dynamic-table.html");
 
-		        
+			        driver.manage().window().maximize();
+			     
 		            // Click on the "Table Data" button
 		            WebElement tableDataButton = driver.findElement(By.xpath("//summary[normalize-space()='Table Data']"));
 		            tableDataButton.click();
@@ -57,16 +59,15 @@ public class Assement {
 		            
 		            //Print the table text
 		            System.out.println(tableText);
-		            
-		            String[][] Expected_data = {{"Bob", "20", "male"},{"George", "42", "male"},{"Sara", "42", "female"},{"Conor", "40", "male"},{"Jennifer", "42", "female"}};
-			        
-			        assert tableText.equals(Expected_data);
-		      
-			        // close the driver
-		            driver.quit();
-		        
-		        
-		    }		
-	}
+		
+		            //Assert the table data 
+		            assert tableText.contains("Bob") && tableText.contains("20") && tableText.contains("male") && tableText.contains("George") && tableText.contains("Sara")
+	                   && tableText.contains("Conor") && tableText.contains("Jennifer")&& tableText.contains("female")&& tableText.contains("42")&& tableText.contains("40");
+                            // close the driver
+		            driver.quit();		            
+			        	
+}
+}		        
+
 
 
